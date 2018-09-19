@@ -14,7 +14,7 @@ $html = scraperwiki::scrape("http://www.imdb.com/chart/top");
 $dom = new simple_html_dom();
 $dom->load($html);
 
-$movies=$dom->find('td','titleColumn');
+$movies=$dom->find('.titleColumn');
 preg_match_all('|<tr bgcolor="#.*?" valign="top"><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1"><b>(.*?)\.</b></font></td><td align="center"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td><td><font face="Arial, Helvetica, sans-serif" size="-1"><a href="(.*?)">.*?</a> \(.*?\)</font></td><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td></tr>|', $html, $arr);
 foreach ($arr[1] as $key => $val) {
     scraperwiki::save_sqlite([
