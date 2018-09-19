@@ -17,9 +17,9 @@ $dom->load($html);
 $movies=$dom->find('.titleColumn');
 $ids=[];
 foreach($dom->find('td.titleColumn') as $movie) {
-   print_r($movie->innertext);
 
-   preg_match('#.*?([1-9][0-9]{0,2})\..*?<a.*?/.*?\/title\/(.+)?\/.*#', $movie->innertext, $match);
+   preg_match('#.*?([1-9][0-9]{0,2})\..*?<a.*?\/title\/(.+)?\/.*#', $movie->innertext, $match);
+      print_r($match);
     $ids[$match[1]]=$match[2];
 }
 print_r($ids);
