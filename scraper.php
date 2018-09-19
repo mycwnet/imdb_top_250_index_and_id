@@ -16,10 +16,10 @@ $dom->load($html);
 
 $movies=$dom->find('.titleColumn');
 $ids=[];
-foreach($dom->find('td.titleColumn a') as $link) {
-    echo $movies->plaintext;
-   preg_match('#.*?\/title\/(.+)?\/#', $link->href, $match);
-    $ids[]=$match[1];
+foreach($dom->find('td.titleColumn') as $movie) {
+
+   preg_match('#.*?([1-9][0-9]{0,2})\..*?<a.*?/.*?\/title\/(.+)?\/#', $movie->plaintext, $match);
+    $ids[$match[1]]=$match[2];
 }
 print_r($ids);
 
