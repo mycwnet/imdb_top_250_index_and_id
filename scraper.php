@@ -16,8 +16,10 @@ foreach ($arr[1] as $key => $val) {
         'rank'
     ], [
         'rank' => "" . clean($arr[1][$key]),
-        'imdb_id' => clean($arr[3][$key])
+        'imdb_id' => clean($arr[2][$key])
     ]);
+    echo clean($arr[1][$key]);
+    echo clean($arr[2][$key]);
 }
 function clean($val)
 {
