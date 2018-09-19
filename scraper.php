@@ -17,7 +17,7 @@ foreach ($arr[1] as $key => $val) {
     ], [
         'rank' => "" . clean($arr[1][$key]),
         'imdb_id' => clean($arr[3][$key])
-    ]);
+    ],'imdb_top_250_ids');
 }
 function clean($val)
 {
