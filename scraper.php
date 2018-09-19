@@ -1,6 +1,7 @@
 
 <?php
 require 'scraperwiki.php';
+require 'scraperwiki/simple_html_dom.php';
 ######################################
 # Basic PHP scraper
 # Credit to Yukoff this code is forked from their scrapper
@@ -9,7 +10,11 @@ require 'scraperwiki.php';
 # and Rank Only
 ######################################
 $html = scraperwiki::scrape("http://www.imdb.com/chart/top");
-$html = oneline($html);
+
+$dom = new simple_html_dom();
+$dom->load($html);
+
+$movies=$dom->find('td','titleColumn');
 preg_match_all('|<tr bgcolor="#.*?" valign="top"><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1"><b>(.*?)\.</b></font></td><td align="center"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td><td><font face="Arial, Helvetica, sans-serif" size="-1"><a href="(.*?)">.*?</a> \(.*?\)</font></td><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td></tr>|', $html, $arr);
 foreach ($arr[1] as $key => $val) {
     scraperwiki::save_sqlite([
@@ -21,7 +26,7 @@ foreach ($arr[1] as $key => $val) {
     echo "rank: " . clean($arr[1][$key]);
     echo "id: " .clean($arr[2][$key]);
 }
- print_r($arr[1]);
+ print_r($movies);
 function clean($val)
 {
     $val = str_replace('&nbsp;', ' ', $val);
