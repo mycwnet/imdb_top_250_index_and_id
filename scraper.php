@@ -18,6 +18,7 @@ foreach($dom->find('td.titleColumn') as $movie) {
    preg_match('#.*?([1-9][0-9]{0,2})\..*?<a.*?\/title\/(.+?)\/.*#', $movie->innertext, $match);
     $ids[]=['rank'=>match[1],'imdb_id'=>$match[2]];
 }
-scraperwiki::save_sqlite(['rank'],$ids)
+print_r($ids);
+//scraperwiki::save_sqlite(['rank'],$ids)
 
 ?>
