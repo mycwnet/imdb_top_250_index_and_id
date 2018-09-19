@@ -18,9 +18,10 @@ foreach ($arr[1] as $key => $val) {
         'rank' => "" . clean($arr[1][$key]),
         'imdb_id' => clean($arr[2][$key])
     ]);
-    echo clean($arr[1][$key]);
-    echo clean($arr[2][$key]);
+    echo "rank: " . clean($arr[1][$key]);
+    echo "id: " .clean($arr[2][$key]);
 }
+ print_r($arr[1]);
 function clean($val)
 {
     $val = str_replace('&nbsp;', ' ', $val);
