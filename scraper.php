@@ -3,23 +3,20 @@
 require 'scraperwiki.php';
 ######################################
 # Basic PHP scraper
-# Credit to Martin Draexler this code is forked from their scrapper
-# https://github.com/draexler/imdb-top-250
+# Credit to Yukoff this code is forked from their scrapper
+# https://github.com/yukoff/imdb-toptv-250
 # I couldn't use most of that data an wanted the ID (which that scraper lacked)
 # and Rank Only
 ######################################
 $html = scraperwiki::scrape("http://www.imdb.com/chart/top");
 $html = oneline($html);
-preg_match_all('|<tr bgcolor="#.*?" valign="top"><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1"><b>(.*?)\.</b></font></td><td align="center"><font face="Arial, Helvetica, sans-serif" size="-1">(.*?)</font></td><td><font face="Arial, Helvetica, sans-serif" size="-1"><a href="(.*?)">(.*?)</a> \((.*?)\)</font></td><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td></tr>|', $html, $arr);
+preg_match_all('|<tr bgcolor="#.*?" valign="top"><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1"><b>(.*?)\.</b></font></td><td align="center"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td><td><font face="Arial, Helvetica, sans-serif" size="-1"><a href="(.*?)">.*?</a> \(.*?\)</font></td><td align="right"><font face="Arial, Helvetica, sans-serif" size="-1">.*?</font></td></tr>|', $html, $arr);
 foreach ($arr[1] as $key => $val) {
-    scraperwiki::save([
+    scraperwiki::save_sqlite([
         'rank'
     ], [
         'rank' => "" . clean($arr[1][$key]),
-        'rating' => clean($arr[2][$key]),
-        'name' => clean($arr[4][$key]),
-        'year' => clean($arr[5][$key]),
-        'link' => clean('http://www.imdb.com' . $arr[3][$key])
+        'imdb_id' => clean($arr[3][$key])
     ]);
 }
 function clean($val)
