@@ -18,7 +18,7 @@ $movies=$dom->find('.titleColumn');
 $ids=[];
 foreach($dom->find('td.titleColumn a') as $link) {
     echo $movies->plaintext;
-   preg_match('/.*?\/title\/(.+)?\/', $link->href, $match);
+   preg_match('#.*?\/title\/(.+)?\/#', $link->href, $match);
     $ids[]=$match[1];
 }
 print_r($ids);
