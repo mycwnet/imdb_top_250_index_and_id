@@ -11,7 +11,7 @@ $html = scraperwiki::scrape("http://www.imdb.com/chart/top");
 $dom = new simple_html_dom();
 $dom->load($html);
 // clear the DB, for some reason scraperwiki fails to honor unique keys?
-ScraperWiki.sqliteexecute("DELETE from data);
+ScraperWiki.sqliteexecute("DELETE from data");
 $movies=$dom->find('.titleColumn');
 foreach($dom->find('td.titleColumn') as $movie) {
 
