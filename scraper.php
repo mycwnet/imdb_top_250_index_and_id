@@ -18,5 +18,6 @@ foreach($dom->find('td.titleColumn') as $movie) {
    preg_match('#.*?([1-9][0-9]{0,2})\..*?<a.*?\/title\/(.+?)\/.*#', $movie->innertext, $match);
   $movies_list[]=['rank'=>$match[1],'imdb_id'=>$match[2]];
 }
+print_r($movies_list);
  scraperwiki::save_sqlite(['rank','imdb_id'],$movies_list);
 ?>
