@@ -12,6 +12,7 @@ $dom = new simple_html_dom();
 $dom->load($html);
 // clear the DB, for some reason scraperwiki fails to honor unique keys?
 scraperwiki::sqliteexecute("DELETE from data");
+scraperwiki::sqlitecommit();
 $movies=$dom->find('.titleColumn');
 foreach($dom->find('td.titleColumn') as $movie) {
 
