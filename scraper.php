@@ -10,13 +10,14 @@ $html = scraperwiki::scrape("http://www.imdb.com/chart/top");
 
 $dom = new simple_html_dom();
 $dom->load($html);
-
+// clear the DB, for some reason scraperwiki fails to honor unique keys?
+ScraperWiki.sqliteexecute("DELETE from data);
 $movies=$dom->find('.titleColumn');
 foreach($dom->find('td.titleColumn') as $movie) {
 
    preg_match('#.*?([1-9][0-9]{0,2})\..*?<a.*?\/title\/(.+?)\/.*#', $movie->innertext, $match);
   
-   scraperwiki::save_sqlite(['imdb_id'],['rank'=>$match[1],'imdb_id'=>$match[2]]);
+   scraperwiki::save_sqlite(['rank','imdb_id'],['rank'=>$match[1],'imdb_id'=>$match[2]]);
 }
 
 ?>
